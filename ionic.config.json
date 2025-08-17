@@ -1,0 +1,8 @@
+{
+  "name": "Fitsnews App",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular",
+  "id": "7e78e71c"
+}
