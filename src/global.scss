@@ -37,6 +37,7 @@
 @import "@ionic/angular/css/palettes/dark.system.css";
 
 
+html, body, ion-app, ion-router-outlet, ion-tabs { height: 100%; }
 
 /* Ensure icons are visible in the tab bar */
 ion-tab-bar {

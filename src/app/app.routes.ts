@@ -1,14 +1,15 @@
 import { Routes } from '@angular/router';
 import { specialTabCanMatch } from './core/guards/special-tab.guard';
+import { TabsPage } from './pages/tabs/tabs.page';
+
 
 export const routes: Routes = [
   {
     path: '',
-    loadComponent: () =>
-      import('./pages/tabs/tabs.page').then((m) => m.TabsPage),
+    component: TabsPage,
     children: [
       {
-        path: 'feed',
+        path: 'home',
         loadComponent: () =>
           import('./pages/home/home.page').then((m) => m.HomePage),
       },
@@ -29,17 +30,20 @@ export const routes: Routes = [
             (m) => m.BookmarksPage
           ),
       },
-      { path: '', pathMatch: 'full', redirectTo: 'feed' },
+      {
+        path: ':specialPath', // e.g. /murdaugh
+        canMatch: [specialTabCanMatch],
+        loadComponent: () =>
+          import('./pages/special/special.page').then((m) => m.SpecialPage),
+      },
+      {
+        path: '',
+        redirectTo: '/home',
+        pathMatch: 'full',
+      },
     ],
   },
   // Special tab route is guarded; if disabled it won't match
-  {
-    path: ':specialPath', // e.g. /murdaugh
-    canMatch: [specialTabCanMatch],
-    loadComponent: () =>
-      import('./pages/special/special.page').then((m) => m.SpecialPage),
-  },
-  // Article detail (full screen, no tabs)
   {
     path: 'article/:id',
     loadComponent: () =>
@@ -47,3 +51,4 @@ export const routes: Routes = [
   },
   { path: '**', redirectTo: '' },
 ];
+

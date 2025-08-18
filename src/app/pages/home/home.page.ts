@@ -1,5 +1,17 @@
 import { Component, inject } from '@angular/core';
-import { IonicModule, InfiniteScrollCustomEvent } from '@ionic/angular';
+//import { IonicModule, InfiniteScrollCustomEvent } from '@ionic/angular';
+import {
+  IonContent,
+  IonRefresher,
+  IonRefresherContent,
+  IonList,
+  IonItem,
+  IonLabel,
+  IonThumbnail,
+  IonInfiniteScroll,
+  IonInfiniteScrollContent,
+  InfiniteScrollCustomEvent,
+} from '@ionic/angular/standalone';
 import { CommonModule } from '@angular/common';
 import { ApiService } from '../../core/services/api.service';
 import { Article } from '../../core/models/article';
@@ -9,7 +21,20 @@ import { HeaderActionsComponent } from '../../shared/components/header-actions/h
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [IonicModule, CommonModule, RouterLink, HeaderActionsComponent],
+  imports: [
+    IonContent,
+    IonRefresher,
+    IonRefresherContent,
+    IonList,
+    IonItem,
+    IonLabel,
+    IonThumbnail,
+    IonInfiniteScroll,
+    IonInfiniteScrollContent,
+    CommonModule,
+    RouterLink,
+    HeaderActionsComponent,
+  ],
   templateUrl: './home.page.html',
 })
 export class HomePage {
