@@ -3,22 +3,14 @@ import { IonicModule, InfiniteScrollCustomEvent } from '@ionic/angular';
 
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar } from '@ionic/angular/standalone';
+import { HeaderActionsComponent } from '../../shared/components/header-actions/header-actions.component';
 
 @Component({
   selector: 'app-bookmarks',
   templateUrl: './bookmarks.page.html',
   styleUrls: ['./bookmarks.page.scss'],
   standalone: true,
-  imports: [
-    IonicModule, 
-    IonContent,
-    IonHeader,
-    IonTitle,
-    IonToolbar,
-    CommonModule,
-    FormsModule,
-  ],
+  imports: [IonicModule, CommonModule, FormsModule, HeaderActionsComponent],
 })
 export class BookmarksPage implements OnInit {
   constructor() {}

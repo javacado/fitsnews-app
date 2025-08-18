@@ -40,7 +40,10 @@ addIcons({
  import { setAssetPath } from 'ionicons';
 
 // If your angular.json copies SVGs to "svg", point Ionicons to it:
- setAssetPath('/');
+ //setAssetPath('/');
+ // Use an absolute URL so URL() never complains
+const base = (document.querySelector('base')?.href || window.location.origin + '/');
+setAssetPath(base);
 
 
 
