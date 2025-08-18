@@ -1,0 +1,12 @@
+.topics {
+  --background: #fff;
+}
+
+ion-list + ion-list {
+  margin-top: 12px;
+}
+
+ion-badge[slot="end"] {
+  min-width: 2.2em;
+  text-align: center;
+}

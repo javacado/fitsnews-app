@@ -1,8 +1,66 @@
-<!-- <app-header-actions title="Search"></app-header-actions> -->
+<app-header-actions title="Search"></app-header-actions>
 
+<ion-content [fullscreen]="true" class="search">
+  <ion-searchbar placeholder="Search FitsNews" [debounce]="300" (ionInput)="onSearchInput($event)"
+    (ionClear)="onClear()">
+  </ion-searchbar>
 
-<ion-content [fullscreen]="true">
-  <app-header-actions title="Search"></app-header-actions>
-<ion-card >dsfgdsfgsdfg</ion-card><br/><br/>
-<ion-card >dsfgdsfgsdfg</ion-card><br/><br/><ion-card>dsfgdsfgsdfg</ion-card><br /><br /><ion-card>dsfgdsfgsdfg</ion-card><br /><br /><ion-card>dsfgdsfgsdfg</ion-card><br /><br /><ion-card>dsfgdsfgsdfg</ion-card><br /><br /><ion-card>dsfgdsfgsdfg</ion-card><br /><br /><ion-card>dsfgdsfgsdfg</ion-card><br /><br /><ion-card>dsfgdsfgsdfg</ion-card><br /><br /><ion-card>dsfgdsfgsdfg</ion-card><br /><br /><ion-card>dsfgdsfgsdfg</ion-card><br /><br /><ion-card>dsfgdsfgsdfg</ion-card><br /><br /><ion-card>dsfgdsfgsdfg</ion-card><br /><br /><ion-card>dsfgdsfgsdfg</ion-card><br /><br /><ion-card>dsfgdsfgsdfg</ion-card><br /><br /><ion-card>dsfgdsfgsdfg</ion-card><br /><br /><ion-card>dsfgdsfgsdfg</ion-card><br /><br /><ion-card>dsfgdsfgsdfg</ion-card><br /><br /><ion-card>dsfgdsfgsdfg</ion-card><br /><br /><ion-card>dsfgdsfgsdfg</ion-card><br /><br /><ion-card>dsfgdsfgsdfg</ion-card><br /><br /><ion-card>dsfgdsfgsdfg</ion-card><br /><br /><ion-card>dsfgdsfgsdfg</ion-card><br /><br /><ion-card>dsfgdsfgsdfg</ion-card><br /><br />
+  <!-- Active filters -->
+  <div class="filters" *ngIf="selectedAuthor || selectedSection">
+    <ion-chip *ngIf="selectedAuthor" (click)="clearFilters()">
+      <ion-label>Author: {{ selectedAuthor?.name }}</ion-label>
+    </ion-chip>
+    <ion-chip *ngIf="selectedSection" (click)="clearFilters()">
+      <ion-label>Section: {{ selectedSection?.name }}</ion-label>
+    </ion-chip>
+  </div>
+
+  <!-- Empty + loading states -->
+  <div class="state" *ngIf="!query && !selectedAuthor && !selectedSection">
+    <ion-text color="medium">Type to search stories, authors, and sections…</ion-text>
+  </div>
+  <div class="state"
+    *ngIf="query && stories.length === 0 && authors.length === 0 && sections.length === 0 && !loadingStories">
+    <ion-text color="medium">No results yet…</ion-text>
+  </div>
+
+  <!-- Authors group -->
+  <ion-list inset="true" *ngIf="authors.length">
+    <ion-list-header>Authors</ion-list-header>
+    <ion-item button detail="true" *ngFor="let a of authors; trackBy: trackById" (click)="filterByAuthor(a)">
+      <ion-label>{{ a.name }}</ion-label>
+      <ion-badge slot="end" color="medium">{{ a.count }}</ion-badge>
+    </ion-item>
+  </ion-list>
+
+  <!-- Sections group -->
+  <ion-list inset="true" *ngIf="sections.length">
+    <ion-list-header>Sections</ion-list-header>
+    <ion-item button detail="true" *ngFor="let s of sections; trackBy: trackById" (click)="filterBySection(s)">
+      <ion-label>{{ s.name }}</ion-label>
+      <ion-badge slot="end" color="medium">{{ s.count }}</ion-badge>
+    </ion-item>
+  </ion-list>
+
+  <!-- Stories group -->
+  <ion-list inset="true" *ngIf="stories.length">
+    <ion-list-header>Stories</ion-list-header>
+    <ion-item *ngFor="let a of stories; trackBy: trackById" [routerLink]="['/article', a.id]" routerDirection="forward"
+      button detail="true">
+      <ion-thumbnail slot="start" *ngIf="a.imageUrl">
+        <img [src]="a.imageUrl" loading="lazy" />
+      </ion-thumbnail>
+      <ion-label>
+        <h2>{{ a.title }}</h2>
+        <p>{{ a.summary }}</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+
+  <!-- Infinite scroll for stories -->
+  <ion-infinite-scroll *ngIf="stories.length && !noMoreStories" threshold="200px"
+    (ionInfinite)="handleInfinite($event)">
+    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more stories...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
 </ion-content>

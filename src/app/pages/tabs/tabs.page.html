@@ -1,5 +1,4 @@
 <ion-tabs>
-  <ion-router-outlet></ion-router-outlet>
 
   <ion-tab-bar slot="bottom">
     <ion-tab-button tab="home" [routerLink]="['/home']">
@@ -23,12 +22,12 @@
     </ion-tab-button>
 
     <!-- Dynamic 5th tab -->
-    <ion-tab-button *ngIf="(cfg.config$ | async)?.specialTab?.enabled"
+    <!-- <ion-tab-button *ngIf="(cfg.config$ | async)?.specialTab?.enabled"
       [routerLink]="['/', (cfg.snapshot?.specialTab?.path || 'special')]"
       [style.color]="cfg.snapshot?.specialTab?.color || null"
       [attr.aria-label]="(cfg.snapshot?.specialTab?.title || 'Special')">
       <ion-icon [name]="cfg.snapshot?.specialTab?.icon || 'flash-outline'"></ion-icon>
       <ion-label>{{ cfg.snapshot?.specialTab?.title || 'Special' }}</ion-label>
-    </ion-tab-button>
+    </ion-tab-button> -->
   </ion-tab-bar>
 </ion-tabs>

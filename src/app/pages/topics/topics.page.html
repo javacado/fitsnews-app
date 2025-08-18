@@ -1,6 +1,24 @@
-<app-header-actions title="Topics and Authors"></app-header-actions>
+<!-- Reusable header with kebab menu (if you kept the menu). -->
+<app-header-actions title="Topics"></app-header-actions>
 
-<ion-content class="ion-padding">
-  <!-- TODO: list categories -->
-  <p>Categories go here.</p>
+<ion-content [fullscreen]="true" class="topics">
+  <!-- Sections -->
+  <ion-list inset="true">
+    <ion-list-header>Sections</ion-list-header>
+
+    <ion-item *ngFor="let s of sections; trackBy: trackById" detail="false">
+      <ion-label>{{ s.name }}</ion-label>
+      <ion-badge slot="end" color="medium">{{ s.count }}</ion-badge>
+    </ion-item>
+  </ion-list>
+
+  <!-- Authors -->
+  <ion-list inset="true">
+    <ion-list-header>Authors</ion-list-header>
+
+    <ion-item *ngFor="let a of authors; trackBy: trackById" detail="false">
+      <ion-label>{{ a.name }}</ion-label>
+      <ion-badge slot="end" color="medium">{{ a.count }}</ion-badge>
+    </ion-item>
+  </ion-list>
 </ion-content>

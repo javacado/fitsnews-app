@@ -22,10 +22,12 @@ import {
   settingsOutline,
   flameOutline,
   flashOutline,
+  optionsOutline,
 } from 'ionicons/icons';
 
 // Make these names available immediately (no network requests needed)
 addIcons({
+  'options-outline':optionsOutline,
   'home-outline': homeOutline,
   'albums-outline': albumsOutline,
   'search-outline': searchOutline,
@@ -50,10 +52,4 @@ setAssetPath(base);
 
 
 
-bootstrapApplication(AppComponent, {
-  providers: [
-    provideRouter(routes),
-    provideIonicAngular(),
-    provideHttpClient(withInterceptorsFromDi()),
-  ],
-}).catch((err) => console.error(err));
+bootstrapApplication(AppComponent, appConfig).catch((err) => console.error(err));

@@ -1,27 +1,19 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { Storage } from '@ionic/storage-angular';
-import { Article } from '../models/article';
 
 @Injectable({ providedIn: 'root' })
 export class BookmarksService {
-  private key = 'bookmarks';
-  private ready = this.storage.create();
-  constructor(private storage: Storage) {}
+  private storage = inject(Storage);
+  private ready = this.storage.create(); // init DB once
 
-  async all(): Promise<Article[]> {
-    await this.ready;
-    return (await this.storage.get(this.key)) ?? [];
-  }
-  async toggle(a: Article) {
-    await this.ready;
-    const bms: Article[] = (await this.storage.get(this.key)) ?? [];
-    const i = bms.findIndex((b) => b.id === a.id);
-    if (i >= 0) bms.splice(i, 1);
-    else bms.unshift(a);
-    await this.storage.set(this.key, bms);
-    return bms;
-  }
   async has(id: string) {
-    return (await this.all()).some((b) => b.id === id);
+    await this.ready;
+    return !!(await this.storage.get(`bm:${id}`));
+  }
+  async toggle(a: { id: string; [k: string]: any }) {
+    await this.ready;
+    const key = `bm:${a.id}`;
+    if (await this.storage.get(key)) return this.storage.remove(key);
+    return this.storage.set(key, a);
   }
 }
