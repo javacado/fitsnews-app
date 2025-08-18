@@ -9,6 +9,7 @@ import {
   IonTabButton,
   IonIcon,
   IonLabel,
+  IonRouterOutlet, // <-- this is the key bit
 } from '@ionic/angular/standalone';
 
 @Component({
@@ -22,7 +23,7 @@ import {
     IonTabButton,
     IonIcon,
     IonLabel,
-    RouterOutlet,
+    IonRouterOutlet,
     RouterLink,
   ],
   templateUrl: './tabs.page.html',
