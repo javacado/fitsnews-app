@@ -1,0 +1,22 @@
+<app-header-actions title="FitsNews"></app-header-actions>
+
+
+<ion-content [fullscreen]="true">
+  <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <ion-list>
+    <ion-item *ngFor="let a of articles" [routerLink]="['/article', a.id]" detail="true">
+      <ion-thumbnail slot="start" *ngIf="a.imageUrl"><img [src]="a.imageUrl" /></ion-thumbnail>
+      <ion-label>
+        <h2>{{ a.title }}</h2>
+        <p>{{ a.summary }}</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+
+  <ion-infinite-scroll (ionInfinite)="handleInfinite($event)">
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-content>

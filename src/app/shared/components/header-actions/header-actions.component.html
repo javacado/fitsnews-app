@@ -1,0 +1,20 @@
+<ion-header [translucent]="translucent">
+    <ion-toolbar [color]="color">
+        <!-- LEFT: back button + optional custom buttons -->
+        <ion-buttons slot="start">
+            <ion-back-button *ngIf="showBack" [defaultHref]="defaultHref"></ion-back-button>
+            <ng-content select="[start-buttons]"></ng-content>
+        </ion-buttons>
+
+        <!-- TITLE -->
+        <ion-title>{{ title }}</ion-title>
+
+        <!-- RIGHT: optional custom buttons + kebab menu -->
+        <ion-buttons slot="end">
+            <ng-content select="[end-buttons]"></ng-content>
+            <ion-menu-button *ngIf="showMenuButton" autoHide="false">
+                <ion-icon slot="icon-only" name="ellipsis-vertical"></ion-icon>
+            </ion-menu-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>

@@ -1,0 +1,7 @@
+# Project: FitsNews (Ionic + Angular + Capacitor)
+- Use Angular standalone components & provideRouter.
+- Pages live in src/app/pages; services in src/app/core/services.
+- Prefer @ionic/storage-angular for simple persistence.
+- Code style: strict TypeScript, explicit return types, RxJS pipeable ops.
+- Never hardcode secrets; read from environment files.
+- When generating Ionic components, default to --standalone.

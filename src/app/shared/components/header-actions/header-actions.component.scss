@@ -1,0 +1,4 @@
+/* Tiny tweaks; keep it minimal and platform-consistent */
+ion-header {
+  --ion-toolbar-border-color: transparent; /* flatter iOS look */
+}

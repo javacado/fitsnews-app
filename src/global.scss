@@ -35,3 +35,17 @@
 /* @import "@ionic/angular/css/palettes/dark.always.css"; */
 /* @import "@ionic/angular/css/palettes/dark.class.css"; */
 @import "@ionic/angular/css/palettes/dark.system.css";
+
+
+
+/* Ensure icons are visible in the tab bar */
+ion-tab-bar {
+  --background: #fff;          /* tweak as you like */
+  --color: #8e8e93;            /* iOS inactive gray */
+  --color-selected: #000;      /* iOS active black */
+}
+
+ion-tab-bar ion-icon {
+  font-size: 22px;             /* guard against inherited 0px font-size */
+  width: 1em; height: 1em;     /* ensure it has size */
+}
