@@ -6,7 +6,10 @@
   </ion-refresher>
 
   <ion-list>
-    <ion-item *ngFor="let a of articles; trackBy: trackById" [routerLink]="['/article', a.id]" detail="true">
+    <ion-item *ngFor="let a of articles; trackBy: trackById" detail="true"
+    routerDirection="forward"
+    button
+    (click)="openArticle(a)">
       <ion-thumbnail slot="start" *ngIf="a.imageUrl">
         <img [src]="a.imageUrl" loading="lazy" />
       </ion-thumbnail>

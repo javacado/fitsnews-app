@@ -1,4 +1,6 @@
 import { Component, inject } from '@angular/core';
+import { Router } from '@angular/router';
+
 //import { IonicModule, InfiniteScrollCustomEvent } from '@ionic/angular';
 import {
   IonContent,
@@ -39,6 +41,8 @@ import { HeaderActionsComponent } from '../../shared/components/header-actions/h
 })
 export class HomePage {
   private api = inject(ApiService);
+  private router = inject(Router);
+  // articles, load(), etc...
 
   articles: Article[] = [];
   page = 1;
@@ -48,6 +52,13 @@ export class HomePage {
 
   ionViewDidEnter() {
     this.load(true);
+  }
+
+  openArticle(a: { id: string; url?: string }) {
+    console.log("CLICK")
+    this.router.navigate(['/article', a.id], {
+      queryParams: { url: a.url ?? '' },
+    });
   }
 
   trackById = (_: number, a: Article) => a.id;
@@ -87,3 +98,13 @@ export class HomePage {
     });
   }
 }
+// export class HomePage {
+//   private router = inject(Router);
+//   // articles, load(), etc...
+
+//   openArticle(a: { id: string; url?: string }) {
+//     this.router.navigate(['/article', a.id], {
+//       queryParams: { url: a.url ?? '' },
+//     });
+//   }
+// }
